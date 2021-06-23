@@ -72,6 +72,35 @@ export class Simulator implements MojaloopClient {
     }
   }
 
+  public async getServices(type: string): Promise<unknown> {
+    logger.info("simulator: getServices")
+    const targetUrl = '/mojaloop/services/' + type
+    const payload = {
+      serviceProviders: [
+        'dfspa', 'dfspb'
+      ] 
+    }
+
+    // Delay operations to simulate network latency in real communication
+    // with Mojaloop.
+    await this.delay(this.options.delay)
+
+
+    // Inject a request to the server as if it receives an inbound request
+    // from Mojaloop.
+    await this.server.inject({
+      method: 'PUT',
+      url: targetUrl,
+      headers: {
+        'Content-Length': JSON.stringify(payload).length.toString(),
+        'Content-Type': 'application/json',
+      },
+      payload,
+    })
+
+    return null;
+  }
+
   public async getAccounts(idValue: string, _destParticipantId: string): Promise<unknown> {
     logger.info("simulator: getAccounts")
     const targetUrl = '/mojaloop/accounts/' + idValue

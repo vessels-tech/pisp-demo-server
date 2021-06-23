@@ -55,6 +55,16 @@ import { NotImplementedError } from '../errors'
 export interface MojaloopClient {
 
   /**
+   * Looks up a list of dfsps who are available to link with
+   * @param idValue 
+   * @param destParticipantId 
+   */
+  getServices(
+    type: string
+  ): Promise<unknown>
+
+
+  /**
    * Looks up a list of accounts with a specific DFSP based
    * on an opaque identifier
    * 
@@ -231,6 +241,10 @@ export class Client implements MojaloopClient{
     this.mojaloopRequests = new MojaloopRequests(fspiopRequestsConfig)
   }
   
+  getServices( type: string): Promise<unknown> {
+    return this.thirdpartyRequests.getServices(type)
+  }
+
   getAccounts(userId: string, destParticipantId: string): Promise<unknown> {
     return this.thirdpartyRequests.getAccounts(userId, destParticipantId)
   }

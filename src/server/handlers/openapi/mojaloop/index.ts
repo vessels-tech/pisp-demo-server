@@ -33,6 +33,7 @@ import * as MojaloopConsentsById from './consents/{ID}'
 import * as MojaloopConsentRequestsById from './consentRequests/{ID}'
 import * as MojaloopPartiesByTypeAndId from './parties/{Type}/{ID}'
 import * as MojaloopPartiesByTypeAndIdError from './parties/{Type}/{ID}/error'
+import * as Services from './services'
 import * as thirdpartyRequests from './thirdpartyRequests'
 
 export const apiHandlers = {
@@ -56,4 +57,6 @@ export const apiHandlers = {
   UpdateThirdPartyTransactionRequests: thirdpartyRequests.put,
   ThirdpartyTransactionRequestsError: thirdpartyRequests.putError,
   NotifyThirdpartyTransactionRequests: thirdpartyRequests.patch,
+
+  PutServicesByServiceType: Services.put,
 }
