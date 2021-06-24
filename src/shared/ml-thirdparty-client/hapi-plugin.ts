@@ -54,6 +54,10 @@ export const MojaloopClient: Plugin<Options> = {
       return;
     }
 
-    (server as StateServer).app.mojaloopClient = new Client({ ...options })
+    (server as StateServer).app.mojaloopClient = new Client({ ...options });
+
+    // Update the list of dfsps who support 3rd party linking
+    // this seems as good a place as any to do it
+    (server as StateServer).app.mojaloopClient.getServices('THIRD_PARTY_DFSP')
   },
 }

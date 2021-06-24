@@ -29,5 +29,6 @@ import { logger } from '~/shared/logger'
 export default async function start(server: Server): Promise<Server> {
   await server.start()
   logger.info(`pisp-demo-server is running @ ${server.info.uri}`)
+
   return server
 }
